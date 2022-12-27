@@ -32,4 +32,34 @@ impl<'a, D> Engine<'a, D> {
             Ok(u32::from_le_bytes(buffer))
         }
     }
+ 
+    pub fn stack64_push(&mut self, value: u64) -> Result<MemAddress> {
+        let address = self.reg_read().rsp() as MemAddress - 8 as MemAddress;
+        unsafe {
+            let buffer = u64::to_le_bytes(value);
+            self.mem_write_raw(address, buffer.as_ptr() as *const _, 8)?;
+        }
+        self.reg_write().rsp(address as _);
+        Ok(address as _)
+    }
+
+    pub fn stack64_peek(&self, index: usize) -> Result<u64> {
+        let address = self.reg_read().rsp() as MemAddress + (index * 8) as MemAddress;
+        unsafe {
+            let mut buffer = [0u8; 8];
+            self.mem_read_raw(address, buffer.as_mut_ptr() as *mut _, 8)?;
+            Ok(u64::from_le_bytes(buffer))
+        }
+    }
+
+    pub fn stack64_pop(&mut self) -> Result<u64> {
+        let address = self.reg_read().rsp() as MemAddress;
+        unsafe {
+            let mut buffer = [0u8; 8];
+            self.mem_read_raw(address, buffer.as_mut_ptr() as *mut _, 8)?;
+            let address = address + 8 as MemAddress;
+            self.reg_write().rsp(address as _);
+            Ok(u64::from_le_bytes(buffer))
+        }
+    }
 }
