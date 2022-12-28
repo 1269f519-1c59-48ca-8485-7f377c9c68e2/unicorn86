@@ -199,4 +199,148 @@ impl<'a, D> Engine<'a, D> {
         }
         Ok(())
     }
+
+    /// Read a u8 value from memory at the specified address.
+    pub fn mem_read_u8(&self, address: MemAddress) -> Result<u8> {
+        let mut buffer = [0; std::mem::size_of::<u8>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(u8::from_le_bytes(buffer))
+    }
+
+    /// Read a i8 value from memory at the specified address.
+    pub fn mem_read_i8(&self, address: MemAddress) -> Result<i8> {
+        let mut buffer = [0; std::mem::size_of::<i8>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(i8::from_le_bytes(buffer))
+    }
+
+    /// Read a u16 value from memory at the specified address.
+    pub fn mem_read_u16(&self, address: MemAddress) -> Result<u16> {
+        let mut buffer = [0; std::mem::size_of::<u16>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(u16::from_le_bytes(buffer))
+    }
+
+    /// Read a i16 value from memory at the specified address.
+    pub fn mem_read_i16(&self, address: MemAddress) -> Result<i16> {
+        let mut buffer = [0; std::mem::size_of::<i16>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(i16::from_le_bytes(buffer))
+    }
+
+    /// Read a u32 value from memory at the specified address.
+    pub fn mem_read_u32(&self, address: MemAddress) -> Result<u32> {
+        let mut buffer = [0; std::mem::size_of::<u32>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(u32::from_le_bytes(buffer))
+    }
+
+    /// Read a i32 value from memory at the specified address.
+    pub fn mem_read_i32(&self, address: MemAddress) -> Result<i32> {
+        let mut buffer = [0; std::mem::size_of::<i32>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(i32::from_le_bytes(buffer))
+    }
+
+    /// Read a u64 value from memory at the specified address.
+    pub fn mem_read_u64(&self, address: MemAddress) -> Result<u64> {
+        let mut buffer = [0; std::mem::size_of::<u64>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(u64::from_le_bytes(buffer))
+    }
+
+    /// Read a i64 value from memory at the specified address.
+    pub fn mem_read_i64(&self, address: MemAddress) -> Result<i64> {
+        let mut buffer = [0; std::mem::size_of::<i64>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(i64::from_le_bytes(buffer))
+    }
+
+    /// Read a u128 value from memory at the specified address.
+    pub fn mem_read_u128(&self, address: MemAddress) -> Result<u128> {
+        let mut buffer = [0; std::mem::size_of::<u128>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(u128::from_le_bytes(buffer))
+    }
+
+    /// Read a i128 value from memory at the specified address.
+    pub fn mem_read_i128(&self, address: MemAddress) -> Result<i128> {
+        let mut buffer = [0; std::mem::size_of::<i128>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(i128::from_le_bytes(buffer))
+    }
+
+    /// Read a f32 value from memory at the specified address.
+    pub fn mem_read_f32(&self, address: MemAddress) -> Result<f32> {
+        let mut buffer = [0; std::mem::size_of::<f32>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(f32::from_le_bytes(buffer))
+    }
+
+    /// Read a f64 value from memory at the specified address.
+    pub fn mem_read_f64(&self, address: MemAddress) -> Result<f64> {
+        let mut buffer = [0; std::mem::size_of::<f64>()];
+        self.mem_read(address, &mut buffer)?;
+        Ok(f64::from_le_bytes(buffer))
+    }
+
+    /// Write a u8 value to memory at the specified address.
+    pub fn mem_write_u8(&mut self, address: MemAddress, value: u8) -> Result<()> {
+        self.mem_write(address, &u8::to_le_bytes(value))
+    }
+
+    /// Write a i8 value to memory at the specified address.
+    pub fn mem_write_i8(&mut self, address: MemAddress, value: i8) -> Result<()> {
+        self.mem_write(address, &i8::to_le_bytes(value))
+    }
+
+    /// Write a u16 value to memory at the specified address.
+    pub fn mem_write_u16(&mut self, address: MemAddress, value: u16) -> Result<()> {
+        self.mem_write(address, &u16::to_le_bytes(value))
+    }
+
+    /// Write a i16 value to memory at the specified address.
+    pub fn mem_write_i16(&mut self, address: MemAddress, value: i16) -> Result<()> {
+        self.mem_write(address, &i16::to_le_bytes(value))
+    }
+
+    /// Write a u32 value to memory at the specified address.
+    pub fn mem_write_u32(&mut self, address: MemAddress, value: u32) -> Result<()> {
+        self.mem_write(address, &u32::to_le_bytes(value))
+    }
+
+    /// Write a i32 value to memory at the specified address.
+    pub fn mem_write_i32(&mut self, address: MemAddress, value: i32) -> Result<()> {
+        self.mem_write(address, &i32::to_le_bytes(value))
+    }
+
+    /// Write a u64 value to memory at the specified address.
+    pub fn mem_write_u64(&mut self, address: MemAddress, value: u64) -> Result<()> {
+        self.mem_write(address, &u64::to_le_bytes(value))
+    }
+
+    /// Write a i64 value to memory at the specified address.
+    pub fn mem_write_i64(&mut self, address: MemAddress, value: i64) -> Result<()> {
+        self.mem_write(address, &i64::to_le_bytes(value))
+    }
+
+    /// Write a u128 value to memory at the specified address.
+    pub fn mem_write_u128(&mut self, address: MemAddress, value: u128) -> Result<()> {
+        self.mem_write(address, &u128::to_le_bytes(value))
+    }
+
+    /// Write a i128 value to memory at the specified address.
+    pub fn mem_write_i128(&mut self, address: MemAddress, value: i128) -> Result<()> {
+        self.mem_write(address, &i128::to_le_bytes(value))
+    }
+
+    /// Write a f32 value to memory at the specified address.
+    pub fn mem_write_f32(&mut self, address: MemAddress, value: f32) -> Result<()> {
+        self.mem_write(address, &f32::to_le_bytes(value))
+    }
+
+    /// Write a f64 value to memory at the specified address.
+    pub fn mem_write_f64(&mut self, address: MemAddress, value: f64) -> Result<()> {
+        self.mem_write(address, &f64::to_le_bytes(value))
+    }
 }
